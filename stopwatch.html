@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stopwatch</title>
+  <style>
+     body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 50px;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="stopwatch">00:00:00</div>
+  <button onclick="start()">Mulai</button>
+  <button onclick="stop()">Berhenti</button>
+  <button onclick="reset()">Reset</button>
+
+  <script>
+    let timer;
+    let seconds = 0, minutes = 0, hours = 0;
+    let isRunning = false;
+
+    function updateDisplay() {
+      document.getElementById('stopwatch').innerText = `${formatTime(hours)}:${formatTime(minutes)}:${formatTime(seconds)}`;
+    }
+
+    function formatTime(time) {
+      return time < 10 ? '0' + time : time;
+    }
+
+    function start() {
+      if (!isRunning) {
+        timer = setInterval(function() {
+          seconds++;
+          if (seconds >= 60) {
+            seconds = 0;
+            minutes++;
+            if (minutes >= 60) {
+              minutes = 0;
+              hours++;
+            }
+          }
+          updateDisplay();
+        }, 1000);
+        isRunning = true;
+      }
+    }
+
+    function stop() {
+      clearInterval(timer);
+      isRunning = false;
+    }
+
+    function reset() {
+      clearInterval(timer);
+      seconds = 0;
+      minutes = 0;
+      hours = 0;
+      updateDisplay();
+      isRunning = false;
+    }
+  </script>
+
+</body>
+</html>
