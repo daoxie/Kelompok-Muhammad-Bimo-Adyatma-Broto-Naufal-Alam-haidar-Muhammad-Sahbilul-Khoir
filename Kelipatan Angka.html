@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kelipatan Angka</title>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Masukkan Kelipatan 1-40</h2>
+    <form>
+        Masukkan Kelipatan: <input type="number" min="1" max="40" id="kelipatan">
+        <button type="button" onclick="generateTable()">Kirim</button>
+    </form>
+
+    <h3>Kelipatan dari Semua</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Angka</th>
+                <th>Kelipatan</th>
+            </tr>
+        </thead>
+        <tbody id="tableBody">
+        </tbody>
+    </table>
+
+    <script>
+        function generateTable() {
+            let kelipatan = document.getElementById("kelipatan").value;
+            let tableBody = document.getElementById("tableBody");
+            tableBody.innerHTML = ""; // Kosongkan tabel sebelum mengisi data baru
+            
+            if (kelipatan < 1 || kelipatan > 40 || kelipatan === "") {
+                alert("Masukkan angka antara 1-40!");
+                return;
+            }
+
+            for (let i = 1; i <= 40; i++) {
+                let hasil = i * kelipatan;
+                if (hasil <= 40) {
+                    let row = `<tr><td>${i}</td><td>${hasil}</td></tr>`;
+                    tableBody.innerHTML += row;
+                } else {
+                    break;
+                }
+            }
+        }
+    </script>
+
+</body>
+</html>
